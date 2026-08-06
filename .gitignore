@@ -1,0 +1,42 @@
+# Terraform working directory
+.terraform/
+# Terraform state
+*.tfstate
+*.tfstate.*
+# Terraform variable files
+*.tfvars
+*.tfvars.json
+# Terraform crash logs
+crash.log
+
+# Terraform plan files
+*.tfplan
+# VS Code
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environment files
+.env
+.env.*
+
+# Google Cloud service account keys
+*-service-account.json
+service-account*.json
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
