@@ -13,3 +13,14 @@ variable "admin_group" {
   description = "Administrator email address"
   type        = string
 }
+variable "vpc_name" {
+  type = string
+}
+
+variable "subnet_name" {
+  type = string
+}
+
+variable "subnet_cidr" {
+  type = string
+}
