@@ -9,6 +9,7 @@ resource "google_project_iam_member" "terraform_editor" {
 
   project = var.project_id
   role    = "roles/editor"
+  #role = "roles/resourcemanager.projectIamAdmin"
 
   member = "serviceAccount:${google_service_account.terraform.email}"
 }
