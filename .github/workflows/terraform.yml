@@ -6,6 +6,10 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -18,14 +22,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/335456104499/locations/global/workloadIdentityPools/github-actions-pool/providers/github-oidc
+          service_account: terraform-sa@verdant-tempest-504711-j0.iam.gserviceaccount.com
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Format
         run: terraform fmt -check -recursive
 
-      - name: Terraform Init (without backend)
-        run: terraform init -backend=false
+      - name: Terraform Init
+        run: terraform init
 
       - name: Terraform Validate
         run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -lock=false
