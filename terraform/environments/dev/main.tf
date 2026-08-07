@@ -54,3 +54,8 @@ module "workload_identity" {
 
   service_account_email = module.service_account.email
 }
+module "security" {
+  source = "../../modules/security"
+
+  project_id = var.project_id
+}
