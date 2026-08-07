@@ -27,3 +27,17 @@ variable "subnet_cidr" {
 variable "bucket_name" {
   type = string
 }
+variable "terraform_sa_name" {
+  type = string
+}
+variable "wif_pool_id" {
+  type = string
+}
+
+variable "wif_provider_id" {
+  type = string
+}
+
+variable "github_repository" {
+  type = string
+}

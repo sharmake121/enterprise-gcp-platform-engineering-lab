@@ -32,3 +32,25 @@ module "storage" {
 
   bucket_name = var.bucket_name
 }
+module "service_account" {
+
+  source = "../../modules/service-account"
+
+  project_id = var.project_id
+
+  account_id = var.terraform_sa_name
+
+  display_name = "Terraform Service Account"
+}
+module "workload_identity" {
+  source = "../../modules/workload-identity"
+
+  project_id = var.project_id
+
+  pool_id     = var.wif_pool_id
+  provider_id = var.wif_provider_id
+
+  github_repository = var.github_repository
+
+  service_account_email = module.service_account.email
+}
