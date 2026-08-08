@@ -5,6 +5,7 @@ on:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,6 +17,7 @@ jobs:
 
     env:
       TF_VAR_project_id: "verdant-tempest-504711-j0"
+      TF_VAR_project_number: "335456104499"
       TF_VAR_region: "us-central1"
       TF_VAR_admin_group: "sharmake7210@gmail.com"
       TF_VAR_vpc_name: "enterprise-vpc"
@@ -26,6 +28,8 @@ jobs:
       TF_VAR_wif_pool_id: "github-actions-pool"
       TF_VAR_wif_provider_id: "github-oidc"
       TF_VAR_github_repository: "sharmake121/enterprise-gcp-platform-engineering-lab"
+      TF_VAR_org_id: "621646987743"
+      TF_VAR_protected_projects: '["335456104499"]'
 
     defaults:
       run:
