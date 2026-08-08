@@ -1,20 +1,40 @@
-resource "google_project_organization_policy" "skip_default_network" {
+resource "google_project_organization_policy" "disable_external_ips" {
   project    = var.project_id
-  constraint = "compute.skipDefaultNetworkCreation"
+  constraint = "compute.vmExternalIpAccess"
+
+  list_policy {
+    deny {
+      all = true
+    }
+  }
+}
+
+
+resource "google_project_organization_policy" "require_os_login" {
+  project    = var.project_id
+  constraint = "compute.requireOsLogin"
 
   boolean_policy {
     enforced = true
   }
 }
-resource "google_project_organization_policy" "allowed_locations" {
-  project    = var.project_id
-  constraint = "gcp.resourceLocations"
 
-  list_policy {
-    allow {
-      values = [
-        "in:us-central1-locations"
-      ]
-    }
+
+resource "google_project_organization_policy" "disable_sa_keys" {
+  project    = var.project_id
+  constraint = "iam.disableServiceAccountKeyCreation"
+
+  boolean_policy {
+    enforced = true
+  }
+}
+
+
+resource "google_project_organization_policy" "storage_public_access_prevention" {
+  project    = var.project_id
+  constraint = "storage.publicAccessPrevention"
+
+  boolean_policy {
+    enforced = true
   }
 }

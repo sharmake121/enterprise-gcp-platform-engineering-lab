@@ -13,3 +13,13 @@ resource "google_project_service" "apis" {
 
   disable_on_destroy = false
 }
+locals {
+  services = [
+    "iam.googleapis.com",
+    "logging.googleapis.com",
+    "monitoring.googleapis.com",
+    "compute.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
+    "serviceusage.googleapis.com"
+  ]
+}
