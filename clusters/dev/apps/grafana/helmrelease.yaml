@@ -1,13 +1,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
-
 metadata:
   name: grafana
   namespace: monitoring
-
 spec:
   interval: 10m
-
   chart:
     spec:
       chart: grafana
@@ -16,7 +13,6 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: monitoring
-
   values:
     serviceAccount:
       create: true
@@ -24,6 +20,12 @@ spec:
       automountServiceAccountToken: true
       annotations:
         iam.gke.io/gcp-service-account: grafana-monitoring@verdant-tempest-504711-j0.iam.gserviceaccount.com
+
+    sidecar:
+      dashboards:
+        enabled: true
+        label: grafana_dashboard
+        labelValue: "1"
 
     datasources:
       datasources.yaml:
@@ -36,4 +38,3 @@ spec:
             jsonData:
               authenticationType: gce
               defaultProject: verdant-tempest-504711-j0
-
