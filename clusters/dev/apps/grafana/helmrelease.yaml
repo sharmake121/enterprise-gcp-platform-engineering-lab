@@ -19,7 +19,7 @@ spec:
       name: grafana
       automountServiceAccountToken: true
       annotations:
-        iam.gke.io/gcp-service-account: grafana-monitoring@verdant-tempest-504711-j0.iam.gserviceaccount.com
+        iam.gke.io/gcp-service-account: grafana-monitoring@client-data-plane-project.iam.gserviceaccount.com
 
     sidecar:
       dashboards:
@@ -37,4 +37,4 @@ spec:
             isDefault: true
             jsonData:
               authenticationType: gce
-              defaultProject: verdant-tempest-504711-j0
+              defaultProject: client-data-plane-project

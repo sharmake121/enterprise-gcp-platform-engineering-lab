@@ -48,7 +48,7 @@ data:
                 ],
                 "groupBys": [],
                 "perSeriesAligner": "ALIGN_MEAN",
-                "projectName": "verdant-tempest-504711-j0",
+                "projectName": "client-data-plane-project",
                 "view": "FULL"
               }
             }
@@ -105,7 +105,7 @@ data:
                 ],
                 "groupBys": [],
                 "perSeriesAligner": "ALIGN_MEAN",
-                "projectName": "verdant-tempest-504711-j0",
+                "projectName": "client-data-plane-project",
                 "view": "FULL"
               }
             }
@@ -162,7 +162,7 @@ data:
                 ],
                 "groupBys": [],
                 "perSeriesAligner": "ALIGN_RATE",
-                "projectName": "verdant-tempest-504711-j0",
+                "projectName": "client-data-plane-project",
                 "view": "FULL"
               }
             }
@@ -213,7 +213,7 @@ data:
                 ],
                 "groupBys": [],
                 "perSeriesAligner": "ALIGN_MEAN",
-                "projectName": "verdant-tempest-504711-j0",
+                "projectName": "client-data-plane-project",
                 "view": "FULL"
               }
             }
@@ -264,13 +264,13 @@ data:
                   "=",
                   "k8s_pod",
                   "AND",
-                  "metric.type",
+                  "metric.type", 
                   "=",
                   "kubernetes.io/pod/uptime"
                 ],
                 "groupBys": [],
                 "perSeriesAligner": "ALIGN_MEAN",
-                "projectName": "verdant-tempest-504711-j0",
+                "projectName": "client-data-plane-project",
                 "view": "FULL"
               }
             }
@@ -327,7 +327,7 @@ data:
                 ],
                 "groupBys": [],
                 "perSeriesAligner": "ALIGN_DELTA",
-                "projectName": "verdant-tempest-504711-j0",
+                "projectName": "client-data-plane-project",
                 "view": "FULL"
               }
             }
