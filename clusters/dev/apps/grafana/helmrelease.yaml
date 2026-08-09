@@ -13,3 +13,10 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: monitoring
+  values:
+    serviceAccount:
+      create: true
+      name: grafana
+      automountServiceAccountToken: true
+      annotations:
+        iam.gke.io/gcp-service-account: grafana-monitoring@verdant-tempest-504711-j0.iam.gserviceaccount.com
