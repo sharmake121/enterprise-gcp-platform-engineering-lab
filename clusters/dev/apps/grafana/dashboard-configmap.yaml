@@ -10,8 +10,349 @@ data:
     {
       "title": "GKE Cluster Overview",
       "uid": "gke-overview",
-      "schemaVersion": 39,
-      "version": 1,
+      "schemaVersion": 42,
+      "version": 2,
       "refresh": "30s",
-      "panels": []
+      "time": {
+        "from": "now-6h",
+        "to": "now"
+      },
+      "panels": [
+        {
+          "id": 1,
+          "title": "GKE Node CPU",
+          "type": "timeseries",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "P53B7819E0F26D6F4"
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "stackdriver",
+                "uid": "P53B7819E0F26D6F4"
+              },
+              "queryType": "timeSeriesList",
+              "refId": "A",
+              "timeSeriesList": {
+                "alignmentPeriod": "60s",
+                "crossSeriesReducer": "REDUCE_MEAN",
+                "filters": [
+                  "resource.type",
+                  "=",
+                  "k8s_node",
+                  "AND",
+                  "metric.type",
+                  "=",
+                  "kubernetes.io/node/cpu/allocatable_utilization"
+                ],
+                "groupBys": [],
+                "perSeriesAligner": "ALIGN_MEAN",
+                "projectName": "verdant-tempest-504711-j0",
+                "view": "FULL"
+              }
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "id": 2,
+          "title": "GKE Node Memory",
+          "type": "timeseries",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "P53B7819E0F26D6F4"
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "stackdriver",
+                "uid": "P53B7819E0F26D6F4"
+              },
+              "queryType": "timeSeriesList",
+              "refId": "A",
+              "timeSeriesList": {
+                "alignmentPeriod": "60s",
+                "crossSeriesReducer": "REDUCE_MEAN",
+                "filters": [
+                  "resource.type",
+                  "=",
+                  "k8s_node",
+                  "AND",
+                  "metric.type",
+                  "=",
+                  "kubernetes.io/node/memory/allocatable_utilization"
+                ],
+                "groupBys": [],
+                "perSeriesAligner": "ALIGN_MEAN",
+                "projectName": "verdant-tempest-504711-j0",
+                "view": "FULL"
+              }
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          }
+        },
+        {
+          "id": 3,
+          "title": "GKE Container CPU Usage",
+          "type": "timeseries",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "P53B7819E0F26D6F4"
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "stackdriver",
+                "uid": "P53B7819E0F26D6F4"
+              },
+              "queryType": "timeSeriesList",
+              "refId": "A",
+              "timeSeriesList": {
+                "alignmentPeriod": "60s",
+                "crossSeriesReducer": "REDUCE_SUM",
+                "filters": [
+                  "resource.type",
+                  "=",
+                  "k8s_container",
+                  "AND",
+                  "metric.type",
+                  "=",
+                  "kubernetes.io/container/cpu/core_usage_time"
+                ],
+                "groupBys": [],
+                "perSeriesAligner": "ALIGN_RATE",
+                "projectName": "verdant-tempest-504711-j0",
+                "view": "FULL"
+              }
+            }
+          ],
+          "options": {
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 8
+          }
+        },
+        {
+          "id": 4,
+          "title": "GKE Container Memory Usage",
+          "type": "timeseries",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "P53B7819E0F26D6F4"
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "stackdriver",
+                "uid": "P53B7819E0F26D6F4"
+              },
+              "queryType": "timeSeriesList",
+              "refId": "A",
+              "timeSeriesList": {
+                "alignmentPeriod": "60s",
+                "crossSeriesReducer": "REDUCE_SUM",
+                "filters": [
+                  "resource.type",
+                  "=",
+                  "k8s_container",
+                  "AND",
+                  "metric.type",
+                  "=",
+                  "kubernetes.io/container/memory/used_bytes"
+                ],
+                "groupBys": [],
+                "perSeriesAligner": "ALIGN_MEAN",
+                "projectName": "verdant-tempest-504711-j0",
+                "view": "FULL"
+              }
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "id": 5,
+          "title": "GKE Pod Count",
+          "type": "timeseries",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "P53B7819E0F26D6F4"
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "stackdriver",
+                "uid": "P53B7819E0F26D6F4"
+              },
+              "queryType": "timeSeriesList",
+              "refId": "A",
+              "timeSeriesList": {
+                "alignmentPeriod": "60s",
+                "crossSeriesReducer": "REDUCE_COUNT",
+                "filters": [
+                  "resource.type",
+                  "=",
+                  "k8s_pod",
+                  "AND",
+                  "metric.type",
+                  "=",
+                  "kubernetes.io/pod/uptime"
+                ],
+                "groupBys": [],
+                "perSeriesAligner": "ALIGN_MEAN",
+                "projectName": "verdant-tempest-504711-j0",
+                "view": "FULL"
+              }
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 16
+          }
+        },
+        {
+          "id": 6,
+          "title": "Container Restart Count",
+          "type": "timeseries",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "P53B7819E0F26D6F4"
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "stackdriver",
+                "uid": "P53B7819E0F26D6F4"
+              },
+              "queryType": "timeSeriesList",
+              "refId": "A",
+              "timeSeriesList": {
+                "alignmentPeriod": "60s",
+                "crossSeriesReducer": "REDUCE_SUM",
+                "filters": [
+                  "resource.type",
+                  "=",
+                  "k8s_container",
+                  "AND",
+                  "metric.type",
+                  "=",
+                  "kubernetes.io/container/restart_count"
+                ],
+                "groupBys": [],
+                "perSeriesAligner": "ALIGN_DELTA",
+                "projectName": "verdant-tempest-504711-j0",
+                "view": "FULL"
+              }
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 16
+          }
+        }
+      ]
     }
