@@ -1,0 +1,88 @@
+﻿displayName: "GKE Metadata-Only Observability"
+
+gridLayout:
+  columns: "2"
+  widgets:
+    - title: "GKE Node CPU Utilization"
+      xyChart:
+        chartOptions:
+          mode: COLOR
+        dataSets:
+          - timeSeriesQuery:
+              timeSeriesFilter:
+                filter: 'metric.type="kubernetes.io/node/cpu/allocatable_utilization"'
+                aggregation:
+                  alignmentPeriod: 60s
+                  perSeriesAligner: ALIGN_MEAN
+                  crossSeriesReducer: REDUCE_MEAN
+        timeshiftDuration: 0s
+
+    - title: "GKE Node Memory Utilization"
+      xyChart:
+        chartOptions:
+          mode: COLOR
+        dataSets:
+          - timeSeriesQuery:
+              timeSeriesFilter:
+                filter: 'metric.type="kubernetes.io/node/memory/allocatable_utilization"'
+                aggregation:
+                  alignmentPeriod: 60s
+                  perSeriesAligner: ALIGN_MEAN
+                  crossSeriesReducer: REDUCE_MEAN
+        timeshiftDuration: 0s
+
+    - title: "GKE Container CPU Usage"
+      xyChart:
+        chartOptions:
+          mode: COLOR
+        dataSets:
+          - timeSeriesQuery:
+              timeSeriesFilter:
+                filter: 'metric.type="kubernetes.io/container/cpu/core_usage_time"'
+                aggregation:
+                  alignmentPeriod: 60s
+                  perSeriesAligner: ALIGN_RATE
+                  crossSeriesReducer: REDUCE_SUM
+        timeshiftDuration: 0s
+
+    - title: "GKE Container Memory Usage"
+      xyChart:
+        chartOptions:
+          mode: COLOR
+        dataSets:
+          - timeSeriesQuery:
+              timeSeriesFilter:
+                filter: 'metric.type="kubernetes.io/container/memory/used_bytes"'
+                aggregation:
+                  alignmentPeriod: 60s
+                  perSeriesAligner: ALIGN_MEAN
+                  crossSeriesReducer: REDUCE_SUM
+        timeshiftDuration: 0s
+
+    - title: "GKE Pod Count"
+      xyChart:
+        chartOptions:
+          mode: COLOR
+        dataSets:
+          - timeSeriesQuery:
+              timeSeriesFilter:
+                filter: 'metric.type="kubernetes.io/anthos/pod/uptime"'
+                aggregation:
+                  alignmentPeriod: 60s
+                  perSeriesAligner: ALIGN_MEAN
+                  crossSeriesReducer: REDUCE_COUNT
+        timeshiftDuration: 0s
+
+    - title: "Container Restart Count"
+      xyChart:
+        chartOptions:
+          mode: COLOR
+        dataSets:
+          - timeSeriesQuery:
+              timeSeriesFilter:
+                filter: 'metric.type="kubernetes.io/container/restart_count"'
+                aggregation:
+                  alignmentPeriod: 60s
+                  perSeriesAligner: ALIGN_DELTA
+                  crossSeriesReducer: REDUCE_SUM
+        timeshiftDuration: 0s

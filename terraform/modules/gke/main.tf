@@ -29,11 +29,20 @@ resource "google_container_cluster" "primary" {
     cluster_ipv4_cidr_block  = var.cluster_ipv4_cidr
     services_ipv4_cidr_block = var.services_ipv4_cidr
   }
-
+  addons_config {
+    network_policy_config {
+      disabled = false
+    }
+  }
+  network_policy {
+    enabled  = true
+    provider = "CALICO"
+  }
   # Workload Identity
   workload_identity_config {
     workload_pool = "${var.project_id}.svc.id.goog"
   }
+
 
   # Terraform manages the node pool below
   remove_default_node_pool = true
@@ -64,6 +73,10 @@ resource "google_container_node_pool" "primary_nodes" {
 
   node_config {
     machine_type = var.machine_type
+    shielded_instance_config {
+      enable_secure_boot          = true
+      enable_integrity_monitoring = true
+    }
 
     disk_type    = "pd-balanced"
     disk_size_gb = var.disk_size_gb

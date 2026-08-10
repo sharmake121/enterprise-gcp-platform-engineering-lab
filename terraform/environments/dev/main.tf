@@ -1,12 +1,11 @@
-module "iam" {
 
+module "iam" {
   source = "../../modules/iam"
 
-  project_id = var.project_id
-
+  project_id  = var.project_id
   admin_group = var.admin_group
-
 }
+
 module "networking" {
   source = "../../modules/networking"
 
@@ -25,15 +24,13 @@ module "org_policies" {
 }
 
 module "service_account" {
-
   source = "../../modules/service-account"
 
-  project_id = var.project_id
-
-  account_id = var.terraform_sa_name
-
+  project_id   = var.project_id
+  account_id   = var.terraform_sa_name
   display_name = "Terraform Service Account"
 }
+
 module "workload_identity" {
   source = "../../modules/workload-identity"
 
@@ -44,15 +41,16 @@ module "workload_identity" {
 
   github_repository = var.github_repository
 
-  service_account_email = module.service_account.email
+  service_account_email = "terraform-sa@verdant-tempest-504711-j0.iam.gserviceaccount.com"
 }
-module "access_context_manager" {
 
+
+module "access_context_manager" {
   source = "../../modules/access-context-manager"
 
   org_id = var.org_id
-
 }
+
 module "vpc_service_controls" {
   source = "../../modules/vpc-service-controls"
 
@@ -62,6 +60,7 @@ module "vpc_service_controls" {
 
   perimeter_name = "genai_data_perimeter"
 }
+
 module "storage" {
   source = "../../modules/storage"
 
@@ -70,35 +69,38 @@ module "storage" {
   bucket_name = var.bucket_name
 }
 
-
 module "security" {
   source = "../../modules/security"
 
   project_id = var.project_id
 }
+
 module "logging" {
   source = "../../modules/logging"
 
   project_id = var.project_id
 }
+
 module "monitoring" {
   source = "../../modules/monitoring"
 
   project_id = var.project_id
 }
+
 module "grafana_integration" {
   source = "../../modules/grafana-integration"
 
   project_id = var.project_id
 }
-module "gitops" {
 
-  source         = "../../modules/gitops"
+module "gitops" {
+  source = "../../modules/gitops"
+
   project_id     = var.project_id
   project_number = var.project_number
   wif_pool_id    = var.wif_pool_id
-
 }
+
 module "gke" {
   source = "../../modules/gke"
 
@@ -117,3 +119,19 @@ module "gke" {
   machine_type = "e2-standard-2"
   disk_size_gb = 50
 }
+
+module "azure_workload_identity" {
+  source = "../../modules/azure-workload-identity"
+
+  project_id              = var.project_id
+  azure_federation_app_id = var.azure_federation_app_id
+  pool_id                 = "azure-control-plane-pool"
+  provider_id             = "azure-oidc-provider"
+
+  azure_tenant_id = var.azure_tenant_id
+  azure_client_id = var.azure_client_id
+
+  service_account_email      = var.azure_control_plane_service_account_email
+  service_account_project_id = "client-data-plane-project"
+}
+

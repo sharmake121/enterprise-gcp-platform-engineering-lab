@@ -61,3 +61,22 @@ variable "protected_projects" {
   type        = list(string)
 }
 
+
+variable "azure_tenant_id" {
+  description = "Microsoft Entra tenant ID"
+  type        = string
+}
+
+variable "azure_client_id" {
+  description = "Azure Managed Identity client ID"
+  type        = string
+}
+
+variable "azure_control_plane_service_account_email" {
+  description = "GCP service account used by Azure control plane"
+  type        = string
+}
+variable "azure_federation_app_id" {
+  description = "Microsoft Entra federation application App ID"
+  type        = string
+}
